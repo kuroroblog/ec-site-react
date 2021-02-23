@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/front
+    working_dir: /front
+    command: yarn start
+    ports:
+      - 3000:3000
