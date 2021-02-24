@@ -1,37 +1,42 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "jest/globals": true
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "standard",
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2020,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "jest"
-    ],
-    "rules": {
-      // note you must disable the base rule as it can report incorrect errors
-      "no-use-before-define": "off",
-      "@typescript-eslint/no-use-before-define": ["error"]
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "prettier",
+    "jest"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true,
+        "semi": false,
+        "printWidth": 120,
+        "tabWidth": 2
       }
+    ]
+  },
+  "root": true,
+  "settings": {
+    "react": {
+      "version": "latest"
     }
+  }
 }
