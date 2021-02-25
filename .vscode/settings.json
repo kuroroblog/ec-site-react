@@ -3,7 +3,7 @@
         "source.fixAll.eslint": true
     },
     "eslint.workingDirectories": [
-        "./front"
+        "./app"
     ],
     "editor.formatOnSave": false
 }
