@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "kuro-blog-49a2a",
+    "prod": "kuro-blog-49a2a"
+  }
+}
