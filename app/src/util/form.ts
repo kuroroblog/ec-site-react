@@ -9,7 +9,7 @@ export const passwordMaxLength = 6
  */
 export const isValidRequiredInput = (...args: Array<string>): boolean => {
   let validateFlag = true
-  for (let i = 0; i < args.length; i = (i + 1) | 0) {
+  for (let i = 0; i < args.length; i++) {
     if (args[i] === '') {
       validateFlag = false
       break
