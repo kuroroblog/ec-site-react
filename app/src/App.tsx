@@ -1,15 +1,7 @@
-import React from 'react'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import { SignUp } from './templetes'
+import Router from './Router'
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={'(/)?'} component={SignUp} />
-      </Switch>
-    </BrowserRouter>
-  )
+  return <Router />
 }
 
 export default App
