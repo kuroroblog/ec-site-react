@@ -7,7 +7,7 @@ export const initialState = {
     list: [],
   },
   users: {
-    isSignedIn: false,
+    isLogIn: false,
     role: '',
     uid: '',
     username: '',

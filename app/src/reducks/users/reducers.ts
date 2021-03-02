@@ -1,7 +1,7 @@
 import * as Actions from './actions'
 import { initialState } from '../store/initialState'
 
-export const UsersReducer = (state = initialState.users, action: any) => {
+export const UsersReducer = (state = initialState.users, action: any): any => {
   switch (action.type) {
     case Actions.EDIT_USER_PROFILE:
       return {
@@ -19,12 +19,12 @@ export const UsersReducer = (state = initialState.users, action: any) => {
         ...state,
         cart: [...action.payload],
       }
-    case Actions.SIGN_IN:
+    case Actions.LOG_IN:
       return {
         ...state,
         ...action.payload,
       }
-    case Actions.SIGN_OUT:
+    case Actions.LOG_OUT:
       return {
         ...initialState.users,
       }

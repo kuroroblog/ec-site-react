@@ -1,7 +1,12 @@
-import { signInTypes } from './types'
+import { userTypes } from './types'
 
 export const EDIT_USER_PROFILE = 'EDIT_USER_PROFILE'
-export const editProfileStateAction = (userProfile: any) => {
+export const editProfileStateAction = (
+  userProfile: any
+): {
+  type: string
+  payload: any
+} => {
   return {
     type: EDIT_USER_PROFILE,
     payload: userProfile,
@@ -9,7 +14,12 @@ export const editProfileStateAction = (userProfile: any) => {
 }
 
 export const FETCH_ORDERS_HISTORY = 'FETCH_ORDERS_HISTORY'
-export const fetchOrdersHistoryAction = (orders: any) => {
+export const fetchOrdersHistoryAction = (
+  orders: any
+): {
+  type: string
+  payload: any
+} => {
   return {
     type: FETCH_ORDERS_HISTORY,
     payload: orders,
@@ -17,31 +27,51 @@ export const fetchOrdersHistoryAction = (orders: any) => {
 }
 
 export const FETCH_PRODUCTS_IN_CART = 'FETCH_PRODUCTS_IN_CART'
-export const fetchProductsInCartAction = (products: any) => {
+export const fetchProductsInCartAction = (
+  products: any
+): {
+  type: string
+  payload: any
+} => {
   return {
     type: FETCH_PRODUCTS_IN_CART,
     payload: products,
   }
 }
 
-export const SIGN_IN = 'SIGN_IN'
-export const signInAction = (userState: signInTypes) => {
+export const LOG_IN = 'LOG_IN'
+export const logInAction = (
+  userState: userTypes
+): {
+  type: string
+  payload: userTypes
+} => {
   return {
-    type: SIGN_IN,
+    type: LOG_IN,
     payload: userState,
   }
 }
 
-export const SIGN_OUT = 'SIGN_OUT'
-export const signOutAction = () => {
+export const LOG_OUT = 'LOG_OUT'
+export const logOutAction = (
+  userState: userTypes
+): {
+  type: string
+  payload: userTypes
+} => {
   return {
-    type: SIGN_OUT,
-    payload: null,
+    type: LOG_OUT,
+    payload: userState,
   }
 }
 
 export const UPDATE_USER_STATE = 'UPDATE_USER_STATE'
-export const updateUserStateAction = (userState: any) => {
+export const updateUserStateAction = (
+  userState: any
+): {
+  type: string
+  payload: any
+} => {
   return {
     type: UPDATE_USER_STATE,
     payload: userState,
