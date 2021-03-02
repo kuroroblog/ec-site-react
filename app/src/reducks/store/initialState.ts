@@ -7,14 +7,9 @@ export const initialState = {
     list: [],
   },
   users: {
-    uid: '',
-    customerId: '',
-    paymentMethodId: '',
-    username: '',
-    email: '',
-    role: '',
     isSignedIn: false,
-    orders: [],
-    cart: [],
+    role: '',
+    uid: '',
+    username: '',
   },
 }

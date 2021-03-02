@@ -1,3 +1,5 @@
+import { signInTypes } from './types'
+
 export const EDIT_USER_PROFILE = 'EDIT_USER_PROFILE'
 export const editProfileStateAction = (userProfile: any) => {
   return {
@@ -23,7 +25,7 @@ export const fetchProductsInCartAction = (products: any) => {
 }
 
 export const SIGN_IN = 'SIGN_IN'
-export const signInAction = (userState: any) => {
+export const signInAction = (userState: signInTypes) => {
   return {
     type: SIGN_IN,
     payload: userState,

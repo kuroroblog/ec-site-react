@@ -25,4 +25,8 @@ export class users {
   ): Promise<void> {
     return this.users.doc(id).set(data)
   }
+
+  public async getData(id: string): Promise<firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>> {
+    return this.users.doc(id).get()
+  }
 }
