@@ -45,7 +45,7 @@ export const logIn = (email: string, password: string) => {
     }
 
     if (!isValidEmailFormat(email)) {
-      alert('メールアドレスの形式が不正です。もう1度お試しください。')
+      alert('メールアドレスの形式が不正です。')
       return false
     }
 
@@ -54,16 +54,13 @@ export const logIn = (email: string, password: string) => {
       return false
     }
 
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(async (result) => {
-        const user = result.user
-        await firebaseAuthLogin(user, dispatch)
-      })
-      .catch((error) => {
-        alert('ログインに失敗しました。もう1度お試しください。')
-        throw new Error(error)
-      })
+    const result = await auth.signInWithEmailAndPassword(email, password).catch((error) => {
+      alert('ログインに失敗しました。もう1度お試しください。')
+      throw new Error(error)
+    })
+
+    const user = result.user
+    await firebaseAuthLogin(user, dispatch)
   }
 }
 
@@ -76,12 +73,12 @@ export const signUp = (username: string, email: string, password: string, confir
     }
 
     if (!isValidEmailFormat(email)) {
-      alert('メールアドレスの形式が不正です。もう1度お試しください。')
+      alert('メールアドレスの形式が不正です。')
       return false
     }
 
     if (password !== confirmPassword) {
-      alert('パスワードが一致しません。もう1度お試しください。')
+      alert('パスワードと確認用パスワードが一致しません。')
       return false
     }
 
@@ -90,39 +87,35 @@ export const signUp = (username: string, email: string, password: string, confir
       return false
     }
 
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(async (result) => {
-        const user = result.user
-        if (user) {
-          const uid = user.uid
-          const timestamp = firebaseTimestamp.now()
+    const result = await auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+      alert('アカウント登録に失敗しました。もう1度お試しください。')
+      throw new Error(error)
+    })
 
-          const usersIns = new users()
-          await usersIns.create(uid, {
-            uid: uid,
-            customerId: '',
-            paymentMethodId: '',
-            username: username,
-            email: email,
-            role: 'customer',
-            createdAt: timestamp,
-            updatedAt: timestamp,
-          })
+    const user = result.user
+    if (user) {
+      const uid = user.uid
+      const timestamp = firebaseTimestamp.now()
 
-          dispatch(push('/'))
-        }
+      const usersIns = new users()
+      await usersIns.create(uid, {
+        uid: uid,
+        customerId: '',
+        paymentMethodId: '',
+        username: username,
+        email: email,
+        role: 'customer',
+        createdAt: timestamp,
+        updatedAt: timestamp,
       })
-      .catch((error) => {
-        alert('アカウント登録に失敗しました。もう1度お試しください。')
-        throw new Error(error)
-      })
+
+      dispatch(push('/login'))
+    }
   }
 }
 
 export const logOut = () => {
   return async (dispatch: any) => {
-    console.log('hoge')
     await auth.signOut()
     dispatch(
       logOutAction({
@@ -144,13 +137,13 @@ export const resetPassword = (email: string) => {
       return false
     }
     if (!isValidEmailFormat(email)) {
-      alert('メールアドレスの形式が不正です。もう1度お試しください。')
+      alert('メールアドレスの形式が不正です。')
       return false
     }
     await auth.sendPasswordResetEmail(email).catch(() => {
       alert('パスワードリセットに失敗しました。通信環境が適切な場所にて再度実行ください。')
     })
-    alert('入力されたメールアドレスへパスワードリセット用のメールを送信しました。')
+    alert('入力されたメールアドレスへリセット用パスワードのメールを送信しました。')
     dispatch(push('/login'))
   }
 }
