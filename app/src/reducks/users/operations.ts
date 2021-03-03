@@ -32,7 +32,6 @@ export const firebaseAuthLogin = async (user: any, dispatch: any): Promise<void>
         username: data.username,
       })
     )
-    dispatch(push('/'))
   }
 }
 
@@ -54,13 +53,15 @@ export const logIn = (email: string, password: string) => {
       return false
     }
 
-    const result = await auth.signInWithEmailAndPassword(email, password).catch((error) => {
+    await auth.signInWithEmailAndPassword(email, password).catch((error) => {
+      /**
+       * @todo ログインに失敗した場合の処理を行う。
+       * @todo email,
+       */
       alert('ログインに失敗しました。もう1度お試しください。')
       throw new Error(error)
     })
-
-    const user = result.user
-    await firebaseAuthLogin(user, dispatch)
+    dispatch(push('/'))
   }
 }
 
@@ -88,6 +89,10 @@ export const signUp = (username: string, email: string, password: string, confir
     }
 
     const result = await auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+      /**
+       * @todo アカウント登録に失敗した場合の処理を行う。
+       * @todo アカウント重複
+       */
       alert('アカウント登録に失敗しました。もう1度お試しください。')
       throw new Error(error)
     })
