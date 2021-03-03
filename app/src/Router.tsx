@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
-import { SignUp, LogIn, Reset, Home } from './templetes'
+import { SignUp, LogIn, Reset, Home, ProductEdit } from './templetes'
 import Auth from './Auth'
 
 const Router = () => {
@@ -10,6 +10,7 @@ const Router = () => {
       <Route exact path={'(/password/reset)'} component={Reset} />
       <Auth>
         <Route exact path={'(/)?'} component={Home} />
+        <Route exact path={'/product/edit'} component={ProductEdit} />
       </Auth>
     </Switch>
   )
