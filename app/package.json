@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "connected-react-router": "^6.9.1",
     "firebase": "^8.2.9",
     "mime": "^2.5.2",

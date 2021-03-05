@@ -1,8 +1,10 @@
 import { push } from 'connected-react-router'
 import { passwordMaxLength, isValidEmailFormat, isValidRequiredInput } from '../../util/form'
 import { auth, firebaseTimestamp } from '../../firebase'
-import { users } from '../../firebase/entity/user'
+import { users } from '../../firebase/firestore/user'
 import { logInAction, logOutAction } from './actions'
+
+const usersIns = new users()
 
 export const listenAuthState = () => {
   return async (dispatch: any) => {
@@ -18,7 +20,6 @@ export const listenAuthState = () => {
 
 export const firebaseAuthLogin = async (user: any, dispatch: any): Promise<void> => {
   if (user) {
-    const usersIns = new users()
     const data = (await usersIns.getData(user.uid)).data()
     if (!data) {
       console.info('不整合なデータ取得が行われました。')
@@ -102,7 +103,6 @@ export const signUp = (username: string, email: string, password: string, confir
       const uid = user.uid
       const timestamp = firebaseTimestamp.now()
 
-      const usersIns = new users()
       await usersIns.create(uid, {
         uid: uid,
         customerId: '',

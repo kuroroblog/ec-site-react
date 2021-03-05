@@ -5,6 +5,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router'
 
 // Import reducers
 import { UsersReducer } from '../users/reducers'
+import { ProductsReducer } from '../products/reducers'
 
 // createStoreの再定義 - historyを引数で受け、connected-react-routerの利用を抽象化
 export default function createStore(history: any) {
@@ -23,6 +24,7 @@ export default function createStore(history: any) {
     combineReducers({
       router: connectRouter(history),
       users: UsersReducer,
+      products: ProductsReducer,
     }),
     applyMiddleware(...middleWares)
   )

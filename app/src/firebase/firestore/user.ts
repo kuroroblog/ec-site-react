@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import { db } from '../../firebase'
+import { db } from '..'
 
 export class users {
   private db: firebase.firestore.Firestore
