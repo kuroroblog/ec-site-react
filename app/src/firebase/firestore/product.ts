@@ -23,6 +23,7 @@ export class products {
     price: number
     createdAt: firebase.firestore.Timestamp
     updatedAt: firebase.firestore.Timestamp
+    images: Array<{ id: string; path: string }>
   }): Promise<void> {
     return this.products.doc(data.id).set(data)
   }

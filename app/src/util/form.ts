@@ -46,3 +46,18 @@ export const isValidTextCnt = (description: string, maxLength: number): boolean 
   }
   return validateFlag
 }
+
+/**
+ * Show an alert if required array is empty
+ *
+ * @param images Array<{ id: string; path: string }>
+ *
+ * @returns {boolean}
+ */
+export const isValidImageInput = (images: Array<{ id: string; path: string }>): boolean => {
+  let validateFlag = true
+  if (images.length <= 0) {
+    validateFlag = false
+  }
+  return validateFlag
+}

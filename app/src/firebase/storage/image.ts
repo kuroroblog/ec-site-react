@@ -21,4 +21,8 @@ export class images {
     const uploadTask = await uploadRef.put(makeFile(file))
     return [uploadTask, filename]
   }
+
+  public async deleteImage(id: string): Promise<any> {
+    return this.images.child(id).delete()
+  }
 }
