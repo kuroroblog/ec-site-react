@@ -6,12 +6,13 @@ import { isValidRequiredInput, descriptionMaxLength, isValidTextCnt, isValidImag
 const productsIns = new products()
 
 export const saveProduct = (
-  name: string,
-  description: string,
+  id: string,
   category: string,
+  description: string,
   gender: string,
-  price: string,
-  images: Array<{ id: string; path: string }>
+  images: Array<{ id: string; path: string }>,
+  name: string,
+  price: string
 ) => {
   return async (dispatch: any) => {
     // validations
@@ -32,17 +33,30 @@ export const saveProduct = (
 
     const timestamp = firebaseTimestamp.now()
     await productsIns
-      .setData({
-        id: await productsIns.getAutoDocId(),
-        category: category,
-        description: description,
-        gender: gender,
-        name: name,
-        price: parseInt(price, 10),
-        createdAt: timestamp,
-        updatedAt: timestamp,
-        images: images,
-      })
+      .setData(
+        id
+          ? {
+              id: id,
+              category: category,
+              description: description,
+              gender: gender,
+              images: images,
+              name: name,
+              price: parseInt(price, 10),
+              updatedAt: timestamp,
+            }
+          : {
+              id: await productsIns.getAutoDocId(),
+              category: category,
+              description: description,
+              gender: gender,
+              images: images,
+              name: name,
+              price: parseInt(price, 10),
+              createdAt: timestamp,
+              updatedAt: timestamp,
+            }
+      )
       .catch((error) => {
         throw new Error(error)
       })

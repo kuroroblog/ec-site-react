@@ -14,17 +14,34 @@ export class products {
     return this.products.doc().id
   }
 
-  public async setData(data: {
-    id: string
-    category: string
-    description: string
-    gender: string
-    name: string
-    price: number
-    createdAt: firebase.firestore.Timestamp
-    updatedAt: firebase.firestore.Timestamp
-    images: Array<{ id: string; path: string }>
-  }): Promise<void> {
-    return this.products.doc(data.id).set(data)
+  public async setData(
+    data:
+      | {
+          id: string
+          category: string
+          description: string
+          gender: string
+          images: Array<{ id: string; path: string }>
+          name: string
+          price: number
+          updatedAt: firebase.firestore.Timestamp
+        }
+      | {
+          id: string
+          category: string
+          description: string
+          gender: string
+          images: Array<{ id: string; path: string }>
+          name: string
+          price: number
+          createdAt: firebase.firestore.Timestamp
+          updatedAt: firebase.firestore.Timestamp
+        }
+  ): Promise<void> {
+    return this.products.doc(data.id).set(data, { merge: true })
+  }
+
+  public async getData(id: string): Promise<firebase.firestore.DocumentData | undefined> {
+    return (await this.products.doc(id).get()).data()
   }
 }

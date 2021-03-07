@@ -1,12 +1,22 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { TextInput, SelectBox, PrimaryButton } from '../components/UIKit'
 import { categories } from '../config/category'
 import { genders } from '../config/gender'
 import { useDispatch } from 'react-redux'
 import { saveProduct } from '../reducks/products/operations'
 import ImageArea from '../components/Products/Image.Area'
+import { useParams } from 'react-router'
+import { products } from '../firebase/firestore/product'
+
+const productsIns = new products()
 
 const ProductEdit = () => {
+  /**
+   * @link https://stackoverflow.com/questions/63660520/typescript-error-after-upgrading-version-4-useparams-from-react-router-dom-pr
+   */
+  const params = useParams<{ id: string }>()
+  const id = params.id
+
   const dispatch = useDispatch()
 
   const [category, setCategory] = useState(''),
@@ -16,18 +26,18 @@ const ProductEdit = () => {
     [name, setName] = useState(''),
     [price, setPrice] = useState('')
 
-  const inputName = useCallback(
-    (event) => {
-      setName(event.target.value)
-    },
-    [setName]
-  )
-
   const inputDescription = useCallback(
     (event) => {
       setDescription(event.target.value)
     },
     [setDescription]
+  )
+
+  const inputName = useCallback(
+    (event) => {
+      setName(event.target.value)
+    },
+    [setName]
   )
 
   const inputPrice = useCallback(
@@ -36,6 +46,22 @@ const ProductEdit = () => {
     },
     [setPrice]
   )
+
+  useEffect(() => {
+    if (id) {
+      ;(async () => {
+        const data = await productsIns.getData(id)
+        if (data) {
+          setCategory(data.category)
+          setDescription(data.description)
+          setGender(data.gender)
+          setImages(data.images)
+          setName(data.name)
+          setPrice(data.price)
+        }
+      })()
+    }
+  }, [id])
 
   return (
     <section>
@@ -85,7 +111,7 @@ const ProductEdit = () => {
       <div className="center">
         <PrimaryButton
           label={'商品情報を保存'}
-          onClick={() => dispatch(saveProduct(name, description, category, gender, price, images))}
+          onClick={() => dispatch(saveProduct(id, category, description, gender, images, name, price))}
         ></PrimaryButton>
       </div>
     </section>
