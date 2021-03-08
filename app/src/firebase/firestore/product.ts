@@ -24,6 +24,7 @@ export class products {
           images: Array<{ id: string; path: string }>
           name: string
           price: number
+          sizes: Array<{ size: string; quantity: number }>
           updatedAt: firebase.firestore.Timestamp
         }
       | {
@@ -34,6 +35,7 @@ export class products {
           images: Array<{ id: string; path: string }>
           name: string
           price: number
+          sizes: Array<{ size: string; quantity: number }>
           createdAt: firebase.firestore.Timestamp
           updatedAt: firebase.firestore.Timestamp
         }

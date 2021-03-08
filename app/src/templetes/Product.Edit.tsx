@@ -7,6 +7,7 @@ import { saveProduct } from '../reducks/products/operations'
 import ImageArea from '../components/Products/Image.Area'
 import { useParams } from 'react-router'
 import { products } from '../firebase/firestore/product'
+import { SetSizeArea } from '../components/Products'
 
 const productsIns = new products()
 
@@ -24,7 +25,8 @@ const ProductEdit = () => {
     [gender, setGender] = useState(''),
     [images, setImages] = useState([]),
     [name, setName] = useState(''),
-    [price, setPrice] = useState('')
+    [price, setPrice] = useState(''),
+    [sizes, setSizes] = useState([])
 
   const inputDescription = useCallback(
     (event) => {
@@ -58,6 +60,7 @@ const ProductEdit = () => {
           setImages(data.images)
           setName(data.name)
           setPrice(data.price)
+          setSizes(data.sizes)
         }
       })()
     }
@@ -106,13 +109,15 @@ const ProductEdit = () => {
           value={price}
           type={'number'}
         />
-      </div>
-      <div className="module-spacer--medium" />
-      <div className="center">
-        <PrimaryButton
-          label={'商品情報を保存'}
-          onClick={() => dispatch(saveProduct(id, category, description, gender, images, name, price))}
-        ></PrimaryButton>
+        <div className="module-spacer--small" />
+        <SetSizeArea sizes={sizes} setSizes={setSizes} />
+        <div className="module-spacer--small" />
+        <div className="center">
+          <PrimaryButton
+            label={'商品情報を保存'}
+            onClick={() => dispatch(saveProduct(id, category, description, gender, images, name, price, sizes))}
+          ></PrimaryButton>
+        </div>
       </div>
     </section>
   )

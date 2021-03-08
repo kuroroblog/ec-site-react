@@ -12,7 +12,8 @@ export const saveProduct = (
   gender: string,
   images: Array<{ id: string; path: string }>,
   name: string,
-  price: string
+  price: string,
+  sizes: Array<{ size: string; quantity: number }>
 ) => {
   return async (dispatch: any) => {
     // validations
@@ -43,6 +44,7 @@ export const saveProduct = (
               images: images,
               name: name,
               price: parseInt(price, 10),
+              sizes: sizes,
               updatedAt: timestamp,
             }
           : {
@@ -53,6 +55,7 @@ export const saveProduct = (
               images: images,
               name: name,
               price: parseInt(price, 10),
+              sizes: sizes,
               createdAt: timestamp,
               updatedAt: timestamp,
             }

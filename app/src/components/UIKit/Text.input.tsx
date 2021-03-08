@@ -7,7 +7,7 @@ const TextInput = (props: {
   multiline: boolean
   required: boolean
   rows: number
-  value: string
+  value: string | number
   type: string
   onChange: any
 }) => {
