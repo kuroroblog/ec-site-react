@@ -1,7 +1,13 @@
 import { push } from 'connected-react-router'
 import { products } from '../../firebase/firestore/product'
 import { firebaseTimestamp } from '../../firebase/index'
-import { isValidRequiredInput, descriptionMaxLength, isValidTextCnt, isValidImageInput } from '../../util/form'
+import {
+  isValidRequiredInput,
+  descriptionMaxLength,
+  isValidTextCnt,
+  isValidImageInput,
+  isValidSizeInput,
+} from '../../util/form'
 
 const productsIns = new products()
 
@@ -24,6 +30,11 @@ export const saveProduct = (
 
     if (!isValidImageInput(images)) {
       alert('画像がアップロードされていません。')
+      return false
+    }
+
+    if (!isValidSizeInput(sizes)) {
+      alert('サイズが登録されていません。')
       return false
     }
 

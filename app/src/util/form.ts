@@ -61,3 +61,18 @@ export const isValidImageInput = (images: Array<{ id: string; path: string }>): 
   }
   return validateFlag
 }
+
+/**
+ * Show an alert if required array is empty
+ *
+ * @param sizes Array<{ size: string; quantity: number }>
+ *
+ * @returns {boolean}
+ */
+export const isValidSizeInput = (sizes: Array<{ size: string; quantity: number }>): boolean => {
+  let validateFlag = true
+  if (sizes.length <= 0) {
+    validateFlag = false
+  }
+  return validateFlag
+}
