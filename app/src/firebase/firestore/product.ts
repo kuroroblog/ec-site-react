@@ -46,4 +46,12 @@ export class products {
   public async getData(id: string): Promise<firebase.firestore.DocumentData | undefined> {
     return (await this.products.doc(id).get()).data()
   }
+
+  public async getList(): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> {
+    return this.products.orderBy('updatedAt', 'desc').get()
+  }
+
+  public async delete(id: string): Promise<void> {
+    return this.products.doc(id).delete()
+  }
 }

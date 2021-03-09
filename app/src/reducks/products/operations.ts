@@ -7,66 +7,67 @@ import {
   isValidTextCnt,
   isValidImageInput,
   isValidSizeInput,
+  isValidPriceInput,
 } from '../../util/form'
+import { fetchProductsAction, deleteProductAction } from './actions'
+import firebase from 'firebase'
+import { productTypes } from './types'
 
 const productsIns = new products()
 
-export const saveProduct = (
-  id: string,
-  category: string,
-  description: string,
-  gender: string,
-  images: Array<{ id: string; path: string }>,
-  name: string,
-  price: string,
-  sizes: Array<{ size: string; quantity: number }>
-) => {
+export const saveProduct = (product: productTypes) => {
   return async (dispatch: any) => {
     // validations
-    if (!isValidRequiredInput(name, description, category, gender, price)) {
+    if (!isValidRequiredInput(product.name, product.description, product.category, product.gender, product.price)) {
       alert('必須項目が未入力です。')
       return false
     }
 
-    if (!isValidImageInput(images)) {
+    if (!isValidImageInput(product.images)) {
       alert('画像がアップロードされていません。')
       return false
     }
 
-    if (!isValidSizeInput(sizes)) {
+    if (!isValidSizeInput(product.sizes)) {
       alert('サイズが登録されていません。')
       return false
     }
 
-    if (!isValidTextCnt(description, descriptionMaxLength)) {
+    if (!isValidTextCnt(product.description, descriptionMaxLength)) {
       alert('説明文の文字数が' + descriptionMaxLength + '文字以上でありません。')
+      return false
+    }
+
+    const price = parseInt(product.price, 10)
+    if (!isValidPriceInput(price)) {
+      alert('値段が0円より大きな値段で入力されていません。')
       return false
     }
 
     const timestamp = firebaseTimestamp.now()
     await productsIns
       .setData(
-        id
+        product.id
           ? {
-              id: id,
-              category: category,
-              description: description,
-              gender: gender,
-              images: images,
-              name: name,
-              price: parseInt(price, 10),
-              sizes: sizes,
+              id: product.id,
+              category: product.category,
+              description: product.description,
+              gender: product.gender,
+              images: product.images,
+              name: product.name,
+              price: price,
+              sizes: product.sizes,
               updatedAt: timestamp,
             }
           : {
               id: await productsIns.getAutoDocId(),
-              category: category,
-              description: description,
-              gender: gender,
-              images: images,
-              name: name,
-              price: parseInt(price, 10),
-              sizes: sizes,
+              category: product.category,
+              description: product.description,
+              gender: product.gender,
+              images: product.images,
+              name: product.name,
+              price: price,
+              sizes: product.sizes,
               createdAt: timestamp,
               updatedAt: timestamp,
             }
@@ -75,6 +76,29 @@ export const saveProduct = (
         throw new Error(error)
       })
 
+    dispatch(push('/'))
+  }
+}
+
+export const fetchProducts = () => {
+  return async (dispatch: any) => {
+    const productList: Array<firebase.firestore.DocumentData> = []
+    const snapshots = await productsIns.getList()
+    snapshots.forEach((snapshot) => {
+      const product = snapshot.data()
+      productList.push(product)
+    })
+    dispatch(fetchProductsAction(productList))
+  }
+}
+
+export const deleteProduct = (id: string) => {
+  return async (dispatch: any, getState: any) => {
+    await productsIns.delete(id)
+
+    const prevProducts = getState().products.list
+    const newProducts = prevProducts.filter((product: productTypes) => product.id !== id)
+    dispatch(deleteProductAction(newProducts))
     dispatch(push('/'))
   }
 }

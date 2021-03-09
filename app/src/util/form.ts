@@ -76,3 +76,18 @@ export const isValidSizeInput = (sizes: Array<{ size: string; quantity: number }
   }
   return validateFlag
 }
+
+/**
+ * Show an alert if required price <= 0
+ *
+ * @param price number
+ *
+ * @returns {boolean}
+ */
+export const isValidPriceInput = (price: number): boolean => {
+  let validateFlag = true
+  if (price <= 0) {
+    validateFlag = false
+  }
+  return validateFlag
+}
