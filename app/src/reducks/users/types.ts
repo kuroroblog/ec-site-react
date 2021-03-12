@@ -8,8 +8,8 @@ export interface userTypes {
 }
 
 export interface cartTypes {
-  added_at: firebase.firestore.Timestamp
   cartId: string
+  createdAt: firebase.firestore.Timestamp
   productId: string
   quantity: number
   size: string

@@ -5,7 +5,6 @@ import { users } from '../../firebase/firestore/user'
 import { cart } from '../../firebase/firestore/cart'
 import { cartTypes } from './types'
 import { logInAction, logOutAction, fetchProductsInCartAction } from './actions'
-import firebase from 'firebase'
 
 const usersIns = new users()
 

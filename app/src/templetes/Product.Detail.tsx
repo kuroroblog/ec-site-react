@@ -84,8 +84,8 @@ const ProductDetail = () => {
       const timestamp = firebaseTimestamp.now()
       dispatch(
         addProductToCart({
-          added_at: timestamp,
           cartId: '',
+          createdAt: timestamp,
           productId: product.id,
           quantity: 1,
           size: selectedSize,

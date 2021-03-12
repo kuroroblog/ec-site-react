@@ -19,8 +19,8 @@ export class cart {
   }
 
   public async setData(data: {
-    added_at: firebase.firestore.Timestamp
     cartId: string
+    createdAt: firebase.firestore.Timestamp
     productId: string
     quantity: number
     size: string

@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ImagePreview = (props: { path: string; key: string; id: string; delete: any }) => {
   return (
     <div className="p-media__thumb" onClick={() => props.delete(props.id)}>
