@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 })
 
-const SizeTable = (props: { sizes: Array<{ size: string; quantity: number }> }) => {
+const SizeTable = (props: { sizes: Array<{ size: string; quantity: number }>; addProduct: any }) => {
   const classes = useStyles()
   const sizes = props.sizes
 
@@ -34,7 +34,7 @@ const SizeTable = (props: { sizes: Array<{ size: string; quantity: number }> }) 
                 <TableCell className={classes.iconCell}>
                   {size.quantity > 0 ? (
                     <IconButton>
-                      <ShoppingCartIcon />
+                      <ShoppingCartIcon onClick={() => props.addProduct(size.size)} />
                     </IconButton>
                   ) : (
                     <div>売切</div>

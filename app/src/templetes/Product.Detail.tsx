@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { products } from '../firebase/firestore/product'
 import { makeStyles } from '@material-ui/core/styles'
 import { returnCodeToBr, covertPrice } from '../util/format'
 import { ImageSwiper, SizeTable } from '../components/Products'
+import { firebaseTimestamp } from '../firebase/index'
+import { useDispatch } from 'react-redux'
+import { addProductToCart } from '../reducks/users/operations'
 
 const productsIns = new products()
 
@@ -75,6 +78,23 @@ const ProductDetail = () => {
     getProduct()
   }, [])
 
+  const dispatch = useDispatch()
+  const addProduct = useCallback(
+    (selectedSize: string) => {
+      const timestamp = firebaseTimestamp.now()
+      dispatch(
+        addProductToCart({
+          added_at: timestamp,
+          cartId: '',
+          productId: product.id,
+          quantity: 1,
+          size: selectedSize,
+        })
+      )
+    },
+    [product]
+  )
+
   const classes = useStyles()
 
   return (
@@ -88,7 +108,7 @@ const ProductDetail = () => {
             <h2 className="u-text__headline">{product.name}</h2>
             <p className={classes.price}>{covertPrice(product.price)}</p>
             <div className="module-spacer--small" />
-            <SizeTable sizes={product.sizes} />
+            <SizeTable addProduct={addProduct} sizes={product.sizes} />
             <div className="module-spacer--small" />
             <p>{returnCodeToBr(product.description)}</p>
           </div>

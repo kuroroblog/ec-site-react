@@ -13,7 +13,6 @@ export class users {
   public async create(
     id: string,
     data: {
-      uid: string
       customerId: string
       paymentMethodId: string
       username: string

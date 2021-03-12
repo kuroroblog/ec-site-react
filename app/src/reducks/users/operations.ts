@@ -2,7 +2,10 @@ import { push } from 'connected-react-router'
 import { passwordMaxLength, isValidEmailFormat, isValidRequiredInput } from '../../util/form'
 import { auth, firebaseTimestamp } from '../../firebase'
 import { users } from '../../firebase/firestore/user'
-import { logInAction, logOutAction } from './actions'
+import { cart } from '../../firebase/firestore/cart'
+import { cartTypes } from './types'
+import { logInAction, logOutAction, fetchProductsInCartAction } from './actions'
+import firebase from 'firebase'
 
 const usersIns = new users()
 
@@ -29,7 +32,7 @@ export const firebaseAuthLogin = async (user: any, dispatch: any): Promise<void>
       logInAction({
         isLogIn: true,
         role: data.role,
-        uid: data.uid,
+        uid: user.uid,
         username: data.username,
       })
     )
@@ -104,7 +107,6 @@ export const signUp = (username: string, email: string, password: string, confir
       const timestamp = firebaseTimestamp.now()
 
       await usersIns.create(uid, {
-        uid: uid,
         customerId: '',
         paymentMethodId: '',
         username: username,
@@ -150,5 +152,22 @@ export const resetPassword = (email: string) => {
     })
     alert('入力されたメールアドレスへリセット用パスワードのメールを送信しました。')
     dispatch(push('/login'))
+  }
+}
+
+export const addProductToCart = (productToCart: cartTypes) => {
+  return async (dispatch: any, getState: any) => {
+    const uid = getState().users.uid
+    const cartIns = new cart(uid)
+    const cartId = await cartIns.getAutoDocId()
+    productToCart.cartId = cartId
+    await cartIns.setData(productToCart)
+    dispatch(push('/'))
+  }
+}
+
+export const fetchProductsInCart = (products: [cartTypes]) => {
+  return async (dispatch: any) => {
+    dispatch(fetchProductsInCartAction(products))
   }
 }

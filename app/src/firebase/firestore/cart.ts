@@ -1,0 +1,30 @@
+import firebase from 'firebase'
+import { db } from '..'
+
+export class cart {
+  private db: firebase.firestore.Firestore
+  private cart: firebase.firestore.CollectionReference<firebase.firestore.DocumentData>
+
+  constructor(uid: string) {
+    this.db = db
+    this.cart = this.db.collection('users').doc(uid).collection('cart')
+  }
+
+  public async getCart(): Promise<firebase.firestore.CollectionReference<firebase.firestore.DocumentData>> {
+    return this.cart
+  }
+
+  public async getAutoDocId(): Promise<string> {
+    return this.cart.doc().id
+  }
+
+  public async setData(data: {
+    added_at: firebase.firestore.Timestamp
+    cartId: string
+    productId: string
+    quantity: number
+    size: string
+  }): Promise<void> {
+    return this.cart.doc(data.cartId).set(data, { merge: true })
+  }
+}
