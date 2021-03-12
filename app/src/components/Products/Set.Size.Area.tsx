@@ -45,7 +45,7 @@ const SetSizeArea = (props: { sizes: Array<{ size: string; quantity: number }>; 
   )
 
   const addSize = (idx: number, size: string, quantity: number) => {
-    if (size === '' || quantity < 0) {
+    if (size === '' || quantity <= 0) {
       return false
     }
 
