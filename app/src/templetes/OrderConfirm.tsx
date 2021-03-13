@@ -39,7 +39,7 @@ const OrderConfirm = () => {
     return productsInCart.reduce((sum: number, product: cartTypes) => (sum += product.price), 0)
   }, [productsInCart])
   const shippingFee = subTotal >= 10000 ? 0 : 210
-  const tax = subTotal * 0.1
+  const tax = Math.floor(subTotal * 0.1)
   const total = subTotal + shippingFee + tax
 
   return (
