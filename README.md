@@ -6,3 +6,13 @@ $ firebase deploy --only firestore:rules --project prod
 ```
 $ firebase deploy --project prod
 ```
+
+### Generate components file
+```
+$ yarn hygen generator components {componentName} --action={action(directory)Name}
+```
+
+### Generate templates file
+```
+$ yarn hygen generator templates {templateName}
+```
