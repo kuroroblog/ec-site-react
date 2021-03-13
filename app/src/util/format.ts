@@ -7,7 +7,7 @@ import HTMLReactParser from 'html-react-parser'
  *
  * @returns {string}
  */
-export const covertPrice = (price: number): string => {
+export const convertPrice = (price: number): string => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 

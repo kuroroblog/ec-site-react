@@ -5,7 +5,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import { makeStyles } from '@material-ui/styles'
 import IconButton from '@material-ui/core/IconButton'
 import { getUserId } from '../../reducks/users/selectors'
-import { covertPrice } from '../../util/format'
+import { convertPrice } from '../../util/format'
 import { useSelector } from 'react-redux'
 import { cart } from '../../firebase/firestore/cart'
 import { cartTypes } from '../../reducks/users/types'
@@ -33,7 +33,7 @@ const CartListItem = (props: { product: cartTypes }) => {
 
   const name = props.product.name
   const image = props.product.images[0].path
-  const price = covertPrice(props.product.price)
+  const price = convertPrice(props.product.price)
   const size = props.product.size
 
   const removeProductFromCart = async (id: string) => {

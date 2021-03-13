@@ -14,5 +14,5 @@ $ yarn hygen generator components {componentName} --action={action(directory)Nam
 
 ### Generate templates file
 ```
-$ yarn hygen generator templates {templateName}
+$ yarn hygen generator templetes {templeteName}
 ```

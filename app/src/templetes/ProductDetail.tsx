@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { products } from '../firebase/firestore/product'
 import { makeStyles } from '@material-ui/core/styles'
-import { returnCodeToBr, covertPrice } from '../util/format'
+import { returnCodeToBr, convertPrice } from '../util/format'
 import { ImageSwiper, SizeTable } from '../components/Products'
 import { firebaseTimestamp } from '../firebase/index'
 import { useDispatch } from 'react-redux'
@@ -109,7 +109,7 @@ const ProductDetail = () => {
           </div>
           <div className={classes.detail}>
             <h2 className="u-text__headline">{product.name}</h2>
-            <p className={classes.price}>{covertPrice(product.price)}</p>
+            <p className={classes.price}>{convertPrice(product.price)}</p>
             <div className="module-spacer--small" />
             <SizeTable addProduct={addProduct} sizes={product.sizes} />
             <div className="module-spacer--small" />

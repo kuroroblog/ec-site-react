@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import MOreVertIcon from '@material-ui/icons/MoreVert'
 import { useState } from 'react'
 import { deleteProduct } from '../../reducks/products/operations'
-import { covertPrice } from '../../util/format'
+import { convertPrice } from '../../util/format'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +62,7 @@ const ProductCard = (props: {
     setAnchorEl(null)
   }
 
-  const price = covertPrice(props.price)
+  const price = convertPrice(props.price)
   const images = props.images.length > 0 ? props.images[0].path : NoImage
 
   return (
