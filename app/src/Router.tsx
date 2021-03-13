@@ -9,12 +9,14 @@ const Router = () => {
       <Route exact path={'/login'} component={LogIn} />
       <Route exact path={'/password/reset'} component={Reset} />
       <Auth>
-        <Route exact path={'(/)?'} component={ProductList} />
-        <Route exact path={'/product/edit'} component={ProductEdit} />
-        <Route path={'/product/edit/:id(\\w+)'} component={ProductEdit} />
-        <Route path={'/product/:id(\\w+)'} component={ProductDetail} />
-        <Route exact path={'/cart'} component={CartList} />
-        <Route exact path={'/order/confirm'} component={OrderConfirm} />
+        <Switch>
+          <Route exact path={'(/)?'} component={ProductList} />
+          <Route exact path={'/product/edit'} component={ProductEdit} />
+          <Route path={'/product/edit/:id(\\w+)'} component={ProductEdit} />
+          <Route path={'/product/:id(\\w+)'} component={ProductDetail} />
+          <Route exact path={'/cart'} component={CartList} />
+          <Route exact path={'/order/confirm'} component={OrderConfirm} />
+        </Switch>
       </Auth>
     </Switch>
   )
