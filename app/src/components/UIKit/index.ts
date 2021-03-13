@@ -1,3 +1,3 @@
-export { default as TextInput } from './Text.input'
-export { default as PrimaryButton } from './Primary.Button'
-export { default as SelectBox } from './Select.Box'
+export { default as TextInput } from './TextInput'
+export { default as PrimaryButton } from './PrimaryButton'
+export { default as SelectBox } from './SelectBox'
