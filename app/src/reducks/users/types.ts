@@ -10,6 +10,9 @@ export interface userTypes {
 export interface cartTypes {
   cartId: string
   createdAt: firebase.firestore.Timestamp
+  images: Array<{ id: string; path: string }>
+  name: string
+  price: number
   productId: string
   quantity: number
   size: string

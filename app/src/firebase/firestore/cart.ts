@@ -27,4 +27,8 @@ export class cart {
   }): Promise<void> {
     return this.cart.doc(data.cartId).set(data, { merge: true })
   }
+
+  public async delete(id: string): Promise<void> {
+    return this.cart.doc(id).delete()
+  }
 }

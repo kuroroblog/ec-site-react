@@ -86,6 +86,9 @@ const ProductDetail = () => {
         addProductToCart({
           cartId: '',
           createdAt: timestamp,
+          images: product.images,
+          name: product.name,
+          price: product.price,
           productId: product.id,
           quantity: 1,
           size: selectedSize,
