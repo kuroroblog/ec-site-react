@@ -14,6 +14,10 @@ export class products {
     return this.products.doc().id
   }
 
+  public async getRef(id: string): Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> {
+    return this.products.doc(id)
+  }
+
   public async setData(
     data:
       | {

@@ -1,13 +1,14 @@
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useCallback, useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { getProductsInCart } from '../reducks/users/selectors'
 import { makeStyles } from '@material-ui/core/styles'
 import { CartListItem } from '../components/Products'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
-import { TextDetail } from '../components/UIKit'
+import { PrimaryButton, TextDetail } from '../components/UIKit'
 import { cartTypes } from '../reducks/users/types'
 import { convertPrice } from '../util/format'
+import { orderProduct } from '../reducks/products/operations'
 
 const useStyles = makeStyles((theme) => ({
   detailBox: {
@@ -34,6 +35,7 @@ const OrderConfirm = () => {
   const classes = useStyles()
   const selector = useSelector((state) => state)
   const productsInCart = getProductsInCart(selector)
+  const dispatch = useDispatch()
 
   const subTotal = useMemo(() => {
     return productsInCart.reduce((sum: number, product: cartTypes) => (sum += product.price), 0)
@@ -41,6 +43,10 @@ const OrderConfirm = () => {
   const shippingFee = subTotal >= 10000 ? 0 : 210
   const tax = Math.floor(subTotal * 0.1)
   const total = subTotal + shippingFee + tax
+
+  const order = useCallback(() => {
+    dispatch(orderProduct(productsInCart, total))
+  }, [productsInCart, total])
 
   return (
     <section className="c-section-wrapin">
@@ -59,6 +65,7 @@ const OrderConfirm = () => {
           <Divider />
           <div className="module-spacer--extra-extra-small" />
           <TextDetail label={'合計(税込)'} value={'¥' + convertPrice(total)} />
+          <PrimaryButton label="注文する" onClick={() => order()} />
         </div>
       </div>
     </section>

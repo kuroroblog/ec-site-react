@@ -10,6 +10,14 @@ export class users {
     this.users = this.db.collection('users')
   }
 
+  public async getBatch(): Promise<firebase.firestore.WriteBatch> {
+    return this.db.batch()
+  }
+
+  public async getRef(id: string): Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> {
+    return this.users.doc(id)
+  }
+
   public async create(
     id: string,
     data: {

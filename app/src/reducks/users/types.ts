@@ -17,3 +17,11 @@ export interface cartTypes {
   quantity: number
   size: string
 }
+
+export interface orderTypes {
+  id: string
+  images: Array<{ id: string; path: string }>
+  name: string
+  price: number
+  size: string
+}
