@@ -1,5 +1,5 @@
 export const categories = [
-  { id: 'tops', name: 'トップス' },
-  { id: 'shirts', name: 'シャツ' },
-  { id: 'pants', name: 'パンツ' },
+  { id: 'tops', name: 'トップス', path: '/?category=tops' },
+  { id: 'shirts', name: 'シャツ', path: '/?category=shirts' },
+  { id: 'pants', name: 'パンツ', path: '/?category=pants' },
 ]

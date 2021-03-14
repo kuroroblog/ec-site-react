@@ -16,6 +16,8 @@ import { TextInput } from '../UIKit/index'
 import { push } from 'connected-react-router'
 import { useDispatch } from 'react-redux'
 import { logOut } from '../../reducks/users/operations'
+import { genders } from '../../config/gender'
+import { categories } from '../../config/category'
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -52,6 +54,45 @@ const ClosableDrawer = (props: any) => {
     dispatch(push(path))
     props.onClose(event, false)
   }
+
+  const filters = [
+    {
+      func: selectMenu,
+      label: genders[0].name,
+      id: genders[0].id,
+      value: genders[0].path,
+    },
+    {
+      func: selectMenu,
+      label: genders[1].name,
+      id: genders[1].id,
+      value: genders[1].path,
+    },
+    {
+      func: selectMenu,
+      label: genders[2].name,
+      id: genders[2].id,
+      value: genders[2].path,
+    },
+    {
+      func: selectMenu,
+      label: categories[0].name,
+      id: categories[0].id,
+      value: categories[0].path,
+    },
+    {
+      func: selectMenu,
+      label: categories[1].name,
+      id: categories[1].id,
+      value: categories[1].path,
+    },
+    {
+      func: selectMenu,
+      label: categories[2].name,
+      id: categories[2].id,
+      value: categories[2].path,
+    },
+  ]
 
   const menus = [
     {
@@ -125,6 +166,14 @@ const ClosableDrawer = (props: any) => {
               </ListItemIcon>
               <ListItemText primary={'Logout'} />
             </ListItem>
+          </List>
+          <Divider />
+          <List>
+            {filters.map((filter) => (
+              <ListItem button key={filter.id} onClick={(event) => filter.func(event, filter.value)}>
+                <ListItemText primary={filter.label} />
+              </ListItem>
+            ))}
           </List>
         </div>
       </Drawer>
