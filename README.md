@@ -42,3 +42,6 @@ Site URL : https://kuro-blog-49a2a.web.app
 Login email address : piyohoge@gmail.com
 Password : testadmin
 ```
+
+## Reference
+https://www.youtube.com/watch?v=8fNgXnVTULU&t=8s
