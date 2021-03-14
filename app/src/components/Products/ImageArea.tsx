@@ -32,7 +32,7 @@ const ImageArea = (props: { images: Array<{ id: string; path: string }>; setImag
   )
 
   const deleteImage = useCallback(
-    async (id) => {
+    async (id: string) => {
       const res = window.confirm('本当にこの画像を削除しますか？')
       if (!res) {
         return
@@ -48,7 +48,9 @@ const ImageArea = (props: { images: Array<{ id: string; path: string }>; setImag
     <div>
       <div className="p-grid__list-images">
         {images.length > 0 &&
-          images.map((image) => <ImagePreview delete={deleteImage} key={image.id} path={image.path} id={image.id} />)}
+          images.map((image: { id: string; path: string }) => (
+            <ImagePreview delete={deleteImage} key={image.id} path={image.path} id={image.id} />
+          ))}
       </div>
       <div className="u-text-right">
         <span>商品画像を登録する</span>

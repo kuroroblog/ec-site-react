@@ -75,7 +75,15 @@ const SetSizeArea = (props: { sizes: Array<{ size: string; quantity: number }>; 
   }
 
   const deleteSize = (deleteIdx: number) => {
-    const newSizes = props.sizes.filter((item, i) => i !== deleteIdx)
+    const newSizes = props.sizes.filter(
+      (
+        item: {
+          size: string
+          quantity: number
+        },
+        i: number
+      ) => i !== deleteIdx
+    )
     props.setSizes(newSizes)
   }
 
