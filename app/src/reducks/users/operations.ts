@@ -11,7 +11,7 @@ const usersIns = new users()
 
 export const listenAuthState = () => {
   return async (dispatch: any) => {
-    return auth.onAuthStateChanged(async (user) => {
+    return auth.onAuthStateChanged(async (user: firebase.User | null) => {
       if (user) {
         await firebaseAuthLogin(user, dispatch)
       } else {
@@ -57,10 +57,10 @@ export const logIn = (email: string, password: string) => {
       return false
     }
 
-    await auth.signInWithEmailAndPassword(email, password).catch((error) => {
+    await auth.signInWithEmailAndPassword(email, password).catch((error: any) => {
       /**
        * @todo ログインに失敗した場合の処理を行う。
-       * @todo email,
+       * @todo email
        */
       alert('ログインに失敗しました。もう1度お試しください。')
       throw new Error(error)
@@ -92,7 +92,7 @@ export const signUp = (username: string, email: string, password: string, confir
       return false
     }
 
-    const result = await auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+    const result = await auth.createUserWithEmailAndPassword(email, password).catch((error: any) => {
       /**
        * @todo アカウント登録に失敗した場合の処理を行う。
        * @todo アカウント重複

@@ -1,7 +1,17 @@
 import * as Actions from './actions'
 import { initialState } from '../store/initialState'
 
-export const UsersReducer = (state = initialState.users, action: any): any => {
+export const UsersReducer = (
+  state: {
+    isLogIn: boolean
+    role: string
+    uid: string
+    username: string
+    cart: never[]
+    orders: never[]
+  } = initialState.users,
+  action: any
+): any => {
   switch (action.type) {
     case Actions.LOG_IN:
       return {
