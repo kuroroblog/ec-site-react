@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import { db } from '..'
+import { cartTypes } from '../../reducks/users/types'
 
 export class cart {
   private db: firebase.firestore.Firestore
@@ -18,13 +19,7 @@ export class cart {
     return this.cart.doc().id
   }
 
-  public async setData(data: {
-    cartId: string
-    createdAt: firebase.firestore.Timestamp
-    productId: string
-    quantity: number
-    size: string
-  }): Promise<void> {
+  public async setData(data: cartTypes): Promise<void> {
     return this.cart.doc(data.cartId).set(data, { merge: true })
   }
 

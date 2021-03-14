@@ -147,9 +147,9 @@ export const resetPassword = (email: string) => {
       alert('メールアドレスの形式が不正です。')
       return false
     }
-    await auth.sendPasswordResetEmail(email).catch(() => {
+    await auth.sendPasswordResetEmail(email).catch((error: any) => {
       alert('パスワードリセットに失敗しました。通信環境が適切な場所で再度実行ください。')
-      return false
+      throw new Error(error)
     })
     alert('入力されたメールアドレスへリセット用パスワードのメールを送信しました。')
     dispatch(push('/login'))
