@@ -149,6 +149,7 @@ export const resetPassword = (email: string) => {
     }
     await auth.sendPasswordResetEmail(email).catch(() => {
       alert('パスワードリセットに失敗しました。通信環境が適切な場所で再度実行ください。')
+      return false
     })
     alert('入力されたメールアドレスへリセット用パスワードのメールを送信しました。')
     dispatch(push('/login'))
