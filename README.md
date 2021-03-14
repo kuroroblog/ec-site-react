@@ -2,6 +2,12 @@
 ```
 $ firebase deploy --only firestore:rules --project prod
 ```
+
+### Deploy Firestore index rules
+```
+$ firebase deploy --only firestore:indexes --project prod
+```
+
 ### Deploy Firebase project
 ```
 $ firebase deploy --project prod

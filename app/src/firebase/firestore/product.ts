@@ -51,8 +51,18 @@ export class products {
     return (await this.products.doc(id).get()).data()
   }
 
-  public async getList(): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> {
-    return this.products.orderBy('updatedAt', 'desc').get()
+  public async getList(whereObj: {
+    gender: string | null
+    category: string | null
+  }): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> {
+    let query = this.products.orderBy('updatedAt', 'desc')
+    const whereArray = Object.entries(whereObj)
+    for (let i = 0; i < whereArray.length; i++) {
+      if (whereArray[i][1] !== '') {
+        query = query.where(whereArray[i][0], '==', whereArray[i][1])
+      }
+    }
+    return query.get()
   }
 
   public async delete(id: string): Promise<void> {

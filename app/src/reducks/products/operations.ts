@@ -83,10 +83,10 @@ export const saveProduct = (product: productTypes) => {
   }
 }
 
-export const fetchProducts = () => {
+export const fetchProducts = (queryString: { gender: string | null; category: string | null }) => {
   return async (dispatch: any) => {
     const productList: Array<firebase.firestore.DocumentData> = []
-    const snapshots = await productsIns.getList()
+    const snapshots = await productsIns.getList(queryString)
     snapshots.forEach((snapshot) => {
       const product = snapshot.data()
       productList.push(product)
