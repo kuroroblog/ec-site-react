@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { TextInput, PrimaryButton } from '../components/UIKit'
 import { signUp } from '../reducks/users/operations'
 import { useDispatch } from 'react-redux'

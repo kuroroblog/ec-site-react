@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { TextInput, SelectBox, PrimaryButton } from '../components/UIKit'
 import { categories } from '../config/category'
 import { genders } from '../config/gender'
