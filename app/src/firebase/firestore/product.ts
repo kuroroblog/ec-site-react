@@ -58,7 +58,7 @@ export class products {
     let query = this.products.orderBy('updatedAt', 'desc')
     const whereArray = Object.entries(whereObj)
     for (let i = 0; i < whereArray.length; i++) {
-      if (whereArray[i][1] !== '') {
+      if (whereArray[i][1] !== null) {
         query = query.where(whereArray[i][0], '==', whereArray[i][1])
       }
     }
