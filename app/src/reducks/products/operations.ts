@@ -116,7 +116,7 @@ export const orderProduct = (productsInCart: Array<cartTypes>, amount: string) =
     const userRef = await usersIns.getRef(id)
     const timestamp = firebaseTimestamp.now()
 
-    let products: { [key: string]: orderTypes } = {},
+    let products: Array<orderTypes> = [],
       soldOutProducts: Array<string> = []
 
     const batch = await usersIns.getBatch()
@@ -141,13 +141,13 @@ export const orderProduct = (productsInCart: Array<cartTypes>, amount: string) =
         return size
       })
 
-      products[product.productId] = {
+      products.push({
         id: product.productId,
         images: product.images,
         name: product.name,
         price: product.price,
         size: product.size,
-      }
+      })
       batch.update(await productsIns.getRef(product.productId), { sizes: updateSizes })
       batch.delete(userRef.collection('cart').doc(product.cartId))
     }
