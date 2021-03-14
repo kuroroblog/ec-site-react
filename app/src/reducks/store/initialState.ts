@@ -1,8 +1,4 @@
 export const initialState = {
-  loading: {
-    state: false,
-    text: '',
-  },
   products: {
     list: [],
   },
@@ -12,5 +8,6 @@ export const initialState = {
     uid: '',
     username: '',
     cart: [],
+    orders: [],
   },
 }

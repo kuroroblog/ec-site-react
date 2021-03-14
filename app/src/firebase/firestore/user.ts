@@ -36,4 +36,8 @@ export class users {
   public async getData(id: string): Promise<firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>> {
     return this.users.doc(id).get()
   }
+
+  public async getOrders(id: string): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> {
+    return this.users.doc(id).collection('orders').orderBy('updatedAt', 'desc').get()
+  }
 }

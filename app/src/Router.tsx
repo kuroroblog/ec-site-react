@@ -1,5 +1,15 @@
 import { Switch, Route } from 'react-router-dom'
-import { CartList, ProductList, SignUp, LogIn, Reset, ProductEdit, ProductDetail, OrderConfirm } from './templetes'
+import {
+  CartList,
+  ProductList,
+  SignUp,
+  LogIn,
+  Reset,
+  ProductEdit,
+  ProductDetail,
+  OrderConfirm,
+  OrderHistory,
+} from './templetes'
 import Auth from './Auth'
 
 const Router = () => {
@@ -16,6 +26,7 @@ const Router = () => {
           <Route path={'/product/:id(\\w+)'} component={ProductDetail} />
           <Route exact path={'/cart'} component={CartList} />
           <Route exact path={'/order/confirm'} component={OrderConfirm} />
+          <Route exact path={'/order/history'} component={OrderHistory} />
         </Switch>
       </Auth>
     </Switch>

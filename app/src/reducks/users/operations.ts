@@ -4,7 +4,8 @@ import { auth, firebaseTimestamp } from '../../firebase'
 import { users } from '../../firebase/firestore/user'
 import { cart } from '../../firebase/firestore/cart'
 import { cartTypes } from './types'
-import { logInAction, logOutAction, fetchProductsInCartAction } from './actions'
+import { logInAction, logOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction } from './actions'
+import firebase from 'firebase'
 
 const usersIns = new users()
 
@@ -168,5 +169,18 @@ export const addProductToCart = (productToCart: cartTypes) => {
 export const fetchProductsInCart = (products: [cartTypes]) => {
   return async (dispatch: any) => {
     dispatch(fetchProductsInCartAction(products))
+  }
+}
+
+export const fetchOrdersHistory = () => {
+  return async (dispatch: any, getState: any) => {
+    const id = getState().users.uid
+    const list: Array<firebase.firestore.DocumentData> = []
+    const snapshots = await usersIns.getOrders(id)
+    snapshots.forEach((snapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>) => {
+      const data = snapshot.data()
+      list.push(data)
+    })
+    dispatch(fetchOrdersHistoryAction(list))
   }
 }
