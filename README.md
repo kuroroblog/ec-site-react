@@ -1,11 +1,14 @@
 ### Project quick start
 ```
 $ git clone git@github.com:tocchimittsu/ec-site-react.git
-$ cd app/src/firebase
+$ cd ec-site-react/app/src/firebase
 $ touch config.ts
 $ Paste Firebase SDK snippet.(https://firebase.google.com/docs/web/setup?hl=ja)
 $ cd ../../
-$ docker-compose up
+$ yarn install
+$ cd ..
+$ docker-compose up (※初回は時間がかかります。)
+$ Access page at http://localhost:3000
 ```
 
 ### Deploy Firestore security rules
