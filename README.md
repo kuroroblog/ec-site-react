@@ -1,3 +1,13 @@
+### Project quick start
+```
+$ git clone git@github.com:tocchimittsu/ec-site-react.git
+$ cd app/src/firebase
+$ touch config.ts
+$ Paste Firebase SDK snippet.(https://firebase.google.com/docs/web/setup?hl=ja)
+$ cd ../../
+$ docker-compose up
+```
+
 ### Deploy Firestore security rules
 ```
 $ firebase deploy --only firestore:rules --project prod
