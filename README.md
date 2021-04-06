@@ -1,6 +1,6 @@
 ### Project quick start
 ```
-$ git clone git@github.com:tocchimittsu/ec-site-react.git
+$ git clone git@github.com:kuroroblog/ec-site-react.git
 $ cd ec-site-react/app/src/firebase
 $ touch config.ts
 $ Paste Firebase SDK snippet.(https://firebase.google.com/docs/web/setup?hl=ja)
